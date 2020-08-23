@@ -1,12 +1,16 @@
 class Timetable
     def initialize
       @lessons = []
+      @heuristic = nil
+    end
+
+    def set_lessons(lessons)
+        @lessons = lessons
     end
 
     def append_shift(shift)
         new_timetable = Timetable.new
-        new_timetable.lessons = @lessons
-        new_timetable.lessons += shift.slots
+        new_timetable.set_lessons(@lessons + shift.slots)
         new_timetable
     end
 
@@ -23,17 +27,20 @@ class Timetable
     end
 
     # heuristics for selecting timetables
-    def total_time
-        result = 0
-        Weekday::MONDAY..Weekday::SUNDAY.each do |weekday|
-            daily_lessons = @lessons.filter { |slot| slot.day == weekday }
-            unless daily_lessons.empty?
-                earliest_start = daily_lessons.map { |slot| slot.start.minutes }.min
-                latest_end = daily_lessons.map { |slot| slot.end.minutes }.max
-                interval = latest_end - earliest_start
-                result += interval + 60
+    def heuristic
+        if @heuristic.nil?
+            @heuristic = 0
+            (Weekday::MONDAY..Weekday::SUNDAY).each do |weekday|
+                daily_lessons = @lessons.filter { |slot| slot.day?(weekday) }
+                unless daily_lessons.empty?
+                    earliest_start = daily_lessons.map { |slot| slot.start.minutes }.min
+                    latest_end = daily_lessons.map { |slot| slot.end.minutes }.max
+                    interval = latest_end - earliest_start
+                    @heuristic += interval + 60
+                end
             end
         end
-        result
+
+        @heuristic
     end
 end

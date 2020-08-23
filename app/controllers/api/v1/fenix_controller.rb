@@ -24,4 +24,20 @@ class Api::V1::FenixController < ActionController::API
         schedules = @crawler.schedules(params[:course])
         render json: schedules.as_json, status: :ok
     end
+
+    def timetables
+        courses = params[:courses].map { |course| [ @crawler.schedules(course[:id]), course[:types] ] }
+
+        lesson_blocks = courses.map do |course|
+            course.last.map { |type| course.first.get_block_by_type(Type::from(type)) }
+        end.first
+
+        generator = TimetableGenerator.new
+        generator.generate_timetables(lesson_blocks)
+        generator.generated.sort_by(&:heuristic)
+
+        timetables = generator.generated
+
+        render json: timetables.as_json, status: :ok
+    end
 end

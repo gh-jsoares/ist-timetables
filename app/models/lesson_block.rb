@@ -2,11 +2,17 @@ class LessonBlock
   def initialize(type)
     @type = type
     @shifts = []
-    @parent_course = nil
   end
 
   def add_shift(shift)
     @shifts << shift
-    shift.parent_lesson_block = self
+  end
+
+  def type?(type)
+    @type == type
+  end
+
+  def shifts
+    @shifts
   end
 end

@@ -1,7 +1,23 @@
 class Shift
-    def initialize(name)
+    def initialize(name, type)
       @name = name
+      @type = Type::from(type)
       @slots = []
-      @parent_lesson_block = nil
+    end
+
+    def add_lesson_slots(slots)
+      @slots += slots
+    end
+
+    def type
+      @type
+    end
+
+    def slots
+      @slots
+    end
+
+    def to_s
+      @name
     end
 end
