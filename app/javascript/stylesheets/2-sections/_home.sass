@@ -1,0 +1,32 @@
+.container
+    margin: 50px auto
+    max-width: 1000px
+
+    h1
+        font-weight: bold
+        font-size: 2rem
+    
+    #subjects li
+        margin: 0 5px
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        a
+            text-decoration: none
+            color: $text
+            &:hover
+                color: $primary
+                text-decoration: underline
+
+            &::before
+                content: '\f0a4'
+                font-family: 'Font Awesome 5 Free'
+                margin-right: 5px
+        
+        .right
+            display: flex
+            align-items: center
+
+            .checkbox
+                margin: 0 7px
