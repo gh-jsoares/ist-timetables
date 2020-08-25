@@ -1,5 +1,5 @@
 class TimetableGenerator
-    MAX_COMBINATIONS = 10
+    MAX_COMBINATIONS = 99
 
     def initialize
         @generated = []

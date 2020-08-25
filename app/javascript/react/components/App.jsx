@@ -1,8 +1,9 @@
 import React from 'react'
-import CourseDropdown from './form/CourseDropdown'
-import SubjectsDropdown from './form/SubjectsDropdown'
+
+import DegreesDropdown from './form/DegreesDropdown'
+import CoursesDropdown from './form/CoursesDropdown'
+import CourseList from './form/CourseList'
 import SubmitButton from './form/SubmitButton'
-import SubjectsList from './form/SubjectsList'
 
 export default () => {
     return (
@@ -17,10 +18,10 @@ export default () => {
             </ol>
             <div className="form">
                 <SubmitButton />
-                <CourseDropdown />
-                <SubjectsDropdown />
+                <DegreesDropdown />
+                <CoursesDropdown />
             </div>
-            <SubjectsList />
+            <CourseList />
         </div>
     )
 }

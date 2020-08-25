@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'degrees', to: 'fenix#degrees', as: :fenix_degrees
       get 'courses', to: 'fenix#courses', as: :fenix_courses
       get 'schedules', to: 'fenix#schedules', as: :fenix_schedules
+      get 'course', to: 'fenix#course', as: :fenix_course
       post 'timetables', to: 'fenix#timetables', as: :fenix_timetables
     end
   end

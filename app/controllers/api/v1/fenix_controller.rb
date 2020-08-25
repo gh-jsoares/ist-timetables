@@ -25,6 +25,13 @@ class Api::V1::FenixController < ActionController::API
         render json: schedules.as_json, status: :ok
     end
 
+    def course
+        return render json: { message: 'Missing course' }.as_json, status: 400 if params[:course].nil? || params[:course].empty? 
+
+        course = @crawler.course_types(params[:course])
+        render json: course.as_json, status: :ok
+    end
+
     def timetables
         courses = params[:courses].map { |course| [ @crawler.schedules(course[:id]), course[:types] ] }
 

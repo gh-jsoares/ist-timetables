@@ -1,6 +1,6 @@
 class Course
-    def initialize(id, name)
-      @id, @name = id, name
+    def initialize(id, name, acronym)
+      @id, @name, @acronym = id, name, acronym
       @lesson_blocks = []
     end
 

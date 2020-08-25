@@ -6,6 +6,8 @@ ruby '2.7.0'
 # CUSTOM GEMS
 # For handling API requests
 gem 'httparty'
+# Sort alphabetically
+gem 'sort_alphabetical'
 # END CUSTOM GEMS
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

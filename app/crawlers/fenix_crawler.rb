@@ -9,18 +9,26 @@ class FenixCrawler
 
   def degrees
     degrees_response = self.class.get('/degrees', @options_query).parsed_response
-    degrees_response.map { |degree| { id: degree['id'], name: degree['name'] } }
+    degrees_response.map { |degree| { id: degree['id'], name: "(#{degree['acronym']}) #{degree['name']}" } }.sort_by { |k| k[:name] }
   end
 
   def courses(degree_id)
     courses_response = self.class.get("/degrees/#{degree_id}/courses", @options_query).parsed_response
-    courses_response
+    courses_response.sort_alphabetical_by { |k| k['name'] }
   end
 
   def course(course_id)
     course_response = self.class.get("/courses/#{course_id}", @options).parsed_response
     course_name = course_response['name']
-    Course.new(course_id, course_name)
+    course_acronym = course_response['acronym']
+    Course.new(course_id, course_name, course_acronym)
+  end
+
+  def course_types(course_id)
+    course_info = self.class.get("/courses/#{course_id}/schedule", @options).parsed_response
+    course(course_id).as_json.merge({
+      types: course_info['courseLoads'].map { |type| type['type'] }
+    })
   end
 
   def schedules(course_id)
