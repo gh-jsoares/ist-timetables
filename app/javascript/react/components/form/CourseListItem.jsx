@@ -15,6 +15,7 @@ const mapType = (type) => {
         case 'LABORATORIAL':
             name = 'Laboratorials'
             break
+        case 'PROBLEMS':
         default:
             name = 'Problems'
             break

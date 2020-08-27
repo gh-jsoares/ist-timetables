@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default () => {
+export default ({ onSubmit }) => {
     return (
         <div className="form-submit">
-            <button type="submit">Submit</button>
+            <button onClick={onSubmit} type="submit">Submit</button>
         </div>
     )
 }

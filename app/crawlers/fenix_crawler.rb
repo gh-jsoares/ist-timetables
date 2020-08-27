@@ -41,7 +41,7 @@ class FenixCrawler
         day = Weekday.from(lesson['start'])
         start_time = TimeBlock.from(lesson['start'])
         end_time = TimeBlock.from(lesson['end'])
-        room = lesson['room']['name']
+        room = lesson['room']['name'] unless lesson['room'].nil?
         LessonSlot.new(day, start_time, end_time, room)
       end.uniq { |slot| slot.to_s }
       shift.add_lesson_slots(slots)

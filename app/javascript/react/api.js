@@ -14,7 +14,9 @@ export const fetchCourses = (degree_id) => {
 
 export const fetchTimetables = (courses) => {
     const url = `${API_BASE}timetables.json`
-    return axios.post(url)
+    return axios.post(url, {
+        courses: courses.map((course) => ({ id: course.id, types: course.types.map((type) => type.name) }))
+    }, { headers: { 'Content-Type': 'application/json' } })
 }
 
 export const fetchCourse = (course_id) => {

@@ -32,8 +32,8 @@ export const loadCourses = (degree_id) => dispatch => {
         })
 }
 
-export const loadTimetables = () => dispatch => {
-    fetchTimetables()
+export const loadTimetables = (courses) => dispatch => {
+    fetchTimetables(courses)
         .then((response) => {
             dispatch({
                 type: API_TIMETABLES_LOAD,
